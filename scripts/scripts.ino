@@ -6,8 +6,6 @@ int numMeasure = 128;
 
 int soundPin = A0;
 
-// int redLed = 5;
-
 long sum = 0;
 long level = 0;
 
@@ -31,28 +29,24 @@ void loop()
     sum = sum + analogRead(soundPin);
   }
 
-  level = (sum / numMeasure) + 20 - 33;
+  level = (sum / numMeasure) - 13;
 
   lcd.setCursor(0, 1);
   lcd.print("Decibel=");
   lcd.print(level);
   lcd.print("db");
 
+  lcd.setCursor(0, 0);
   if (level < soundLow)
   {
-    lcd.setCursor(0, 0);
     lcd.print("Level=Low");
   }
-
-  if (level > soundLow && level < soundmedium)
+  else if (level > soundLow && level < soundmedium)
   {
-    lcd.setCursor(0, 0);
     lcd.print("Level=Medium");
   }
-
-  if (level > soundmedium)
+  else if (level > soundmedium)
   {
-    lcd.setCursor(0, 0);
     lcd.print("Level=High");
   }
 
